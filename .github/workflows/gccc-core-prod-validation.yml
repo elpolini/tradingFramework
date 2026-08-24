@@ -38,6 +38,10 @@ jobs:
         working-directory: gccc_core_prod
         run: python run_validation.py
 
+      - name: Run live Binance completed-week integration gate
+        working-directory: gccc_core_prod
+        run: python live_signal.py --json-out live_signal.json
+
       - name: Upload validation evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -46,4 +50,5 @@ jobs:
           path: |
             gccc_core_prod/validation_results.json
             gccc_core_prod/validation_report.md
+            gccc_core_prod/live_signal.json
           if-no-files-found: warn
