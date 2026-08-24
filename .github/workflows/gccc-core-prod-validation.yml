@@ -36,7 +36,7 @@ jobs:
 
       - name: Run adversarial validation gates
         working-directory: gccc_core_prod
-        run: python validate.py
+        run: python run_validation.py
 
       - name: Upload validation evidence
         if: always()
