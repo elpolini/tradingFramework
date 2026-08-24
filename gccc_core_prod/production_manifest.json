@@ -1,0 +1,97 @@
+{
+  "model": "GCCC CORE-PROD v1.0",
+  "promotion_date": "2026-08-24",
+  "status": "PROD_VALIDATED_INTERNAL",
+  "reliability_disclaimer": "Internal validation gates passed; this is not a probability of future profitability and not external/institutional certification.",
+  "config": {
+    "frequency": "weekly_completed_close",
+    "trend_weeks": 40,
+    "momentum_weeks": 13,
+    "vol_weeks": 12,
+    "vol_target": 0.25,
+    "cost_bps_validation_base": 25.0,
+    "gross_exposure_cap": 1.0,
+    "leverage": 0,
+    "execution_lag_weeks": 1,
+    "weighting": "inverse_vol",
+    "master_gate": "BTC",
+    "residual_asset": "CASH"
+  },
+  "production_universe": ["BTC", "ETH", "CASH"],
+  "research_only": [
+    "altcoin_ranking",
+    "cycle_1064_364",
+    "composite_cycle_clock",
+    "phase5d_macro",
+    "phase6a_heat",
+    "phase6b_derivatives"
+  ],
+  "validation": {
+    "ci_run_id": 32736320273,
+    "checklist_score": 100.0,
+    "hard_gates_passed": 22,
+    "hard_gates_failed": 0,
+    "full": {
+      "cagr": 0.24803230400171428,
+      "vol": 0.1978864520965866,
+      "sharpe": 1.2181240844937897,
+      "max_dd": -0.1797656779750404
+    },
+    "holdout_2024_plus": {
+      "cagr": 0.28696212244691877,
+      "vol": 0.21340731010145553,
+      "sharpe": 1.2880719360058024,
+      "max_dd": -0.13032286521465197
+    },
+    "cost_stress_100bps": {
+      "cagr": 0.21567920131840368,
+      "sharpe": 1.0841221687393834,
+      "max_dd": -0.23851721097179135
+    },
+    "sensitivity": {
+      "neighbours": 81,
+      "positive_cagr_ratio": 1.0,
+      "sharpe_ge_0_60_ratio": 1.0,
+      "median_sharpe": 1.1709386713479064,
+      "median_max_dd": -0.2048675682559996
+    },
+    "bootstrap": {
+      "simulations": 5000,
+      "block_weeks": 13,
+      "p_historical_recombination_cagr_gt_0": 0.996,
+      "p_historical_recombination_max_dd_gt_minus_50": 0.9984,
+      "cagr_p05": 0.0747725573476364,
+      "max_dd_p05": -0.3494365013536121
+    },
+    "shadow_implementation_match": true,
+    "future_mutation_causality_test": true,
+    "execution_lag_test": true
+  },
+  "historical_data": {
+    "source_commit": "646927e67424160b328658cd43c8a135e639374e",
+    "btc_sha256": "f1bba1a115bd276635d8061b208508f74d5d3ac65b6925ab1df24067fafaa334",
+    "eth_sha256": "01310a04dcd60b86c91f4e5fe50481c14ae4976abff9ade61950296dc1b397d0",
+    "terminal_static_row_policy": "drop_last_row",
+    "validated_end": "2025-12-29"
+  },
+  "live_snapshot_from_completed_week_ending_2026_08_23": {
+    "btc_close": 77734.0,
+    "eth_close": 2463.41,
+    "btc_sma40w": 74432.477,
+    "eth_sma40w": 2268.3215,
+    "btc_momentum13w": 0.008682,
+    "eth_momentum13w": 0.173136,
+    "btc_gate": true,
+    "eth_gate": true,
+    "btc_ann_vol12w": 0.645166,
+    "eth_ann_vol12w": 0.833869,
+    "pre_scale_portfolio_vol": 0.724283,
+    "vol_scale": 0.345169,
+    "target": {
+      "BTC": 0.194604,
+      "ETH": 0.150565,
+      "CASH": 0.654831
+    }
+  },
+  "live_data_policy": "Binance read-only completed weekly bars; exclude partial week; on data failure make no new trade"
+}

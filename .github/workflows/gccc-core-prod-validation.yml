@@ -1,0 +1,53 @@
+name: GCCC CORE-PROD validation
+
+on:
+  pull_request:
+    paths:
+      - 'gccc_core_prod/**'
+      - '.github/workflows/gccc-core-prod-validation.yml'
+  push:
+    branches:
+      - gccc-core-prod-v1
+    paths:
+      - 'gccc_core_prod/**'
+      - '.github/workflows/gccc-core-prod-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deterministic runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'numpy==2.2.6' 'pandas==2.2.3'
+
+      - name: Run adversarial validation gates
+        working-directory: gccc_core_prod
+        run: python run_validation.py
+
+      - name: Run independent shadow implementation equivalence gate
+        working-directory: gccc_core_prod
+        run: python shadow_check.py
+
+      - name: Upload validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gccc-core-prod-validation
+          path: |
+            gccc_core_prod/validation_results.json
+            gccc_core_prod/validation_report.md
+          if-no-files-found: warn
