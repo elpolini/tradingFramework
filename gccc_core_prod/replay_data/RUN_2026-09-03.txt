@@ -1,0 +1,1 @@
+Trigger strict replay through completed week ending 2026-08-30.
